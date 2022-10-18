@@ -1,0 +1,27 @@
+﻿@model NoteViewModel
+
+<style>
+    .block{
+        justify-content: center;
+        margin-top:22px;
+    }
+    .point{
+        color:gray;
+        font-size:12px;
+    }
+</style>
+
+<h1>Create new Note</h1>
+<form method="post" asp-action="Create" asp-controller="Home">
+    <div class="block">
+        <h3>Title</h3>
+        <textarea asp-for="Title" maxlength="25"></textarea>
+        <p class="point">25 charter</p>
+    </div>
+    <div class="block">
+        <h4>Description</h4>
+        <textarea asp-for="Description" maxlength="125"></textarea>
+        <p class="point">125 charter</p>
+    </div>
+    <button type="submit"> Create</button>
+</form>

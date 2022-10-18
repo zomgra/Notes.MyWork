@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NoteViewModel>
+
+<style>
+    .create-btn{
+        margin: 10px;
+        border: groove, 1px;
+        padding-top: 30px;
+    }
+    .block{
+        margin:15px;
+        padding : 30px;
+        border:dashed 1px;
+        max-width: 30%; 
+        justify-content: center;
+    }
+    .block.a{
+        margin-top: 15px;
+        color:darkslategray;
+    }
+
+    .block.a:hover {
+        color:aqua;
+    }
+</style>
+
+@if(!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p>@ViewBag.ErrorMessage</p>
+}
+else
+    @foreach(var note in Model){
+        <div class="block">
+            @*<h2>@note.Id</h2>*@
+            <h2>@note.Title</h2>
+            <h2>@note.Description</h2>
+            <a asp-action="Edit" asp-controller="Home" asp-route-id="@note.Id">Edit</a>
+        </div>
+    }
+<a class="create-btn" asp-action="Create" asp-controller="Home">Create</a>

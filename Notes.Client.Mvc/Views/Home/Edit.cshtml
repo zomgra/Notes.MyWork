@@ -1,0 +1,42 @@
+﻿@model NoteViewModel
+
+<style>
+    .delete-btn{
+        color: darkred;
+        margin-top: 35px;
+    }
+    .edit-btn{
+        color: dodgerblue;
+        margin-left : 35px;
+    }
+    .block{
+        margin: 30px;
+    }
+    .block.textarea{
+        margin-left:55px;
+        border-block-color: slategray;
+    }
+    .point{
+        color:gray;
+        font-size: 12px;
+    }
+</style>
+
+<div class="block">
+    <form method="post" asp-action="Edit" asp-controller="Home">
+        <input hidden asp-for="Id" value="@Model.Id"/>
+        <div>
+            <input asp-for="Title" maxlength="25"/>
+            <p class="point">25 charter</p>
+        </div>
+        <div>
+            <textarea asp-for="Description"></textarea>
+            <p class="point">125 charter</p>
+        </div>
+        <button class="edit-btn" type="submit">Edit!</button>
+    </form>
+</div>
+<form asp-action="Delete" asp-controller="Home" method="post">
+    <input hidden asp-for="@Model.Id"/>
+    <button class="delete-btn">Delete</button>
+</form>
