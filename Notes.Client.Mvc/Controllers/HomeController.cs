@@ -18,7 +18,7 @@ namespace Notes.Client.Mvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-           var result = await noteRepository.UpdateRepositoryAsync("https://localhost:8001/api/note/all");
+           var result = await noteRepository.UpdateRepositoryAsync();
             if (!result)
                 ViewBag.ErrorMessage = "Notes not found";
            return View(noteRepository.GetAllNotes());

@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Notes.Api.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using Notes.Api.Entity;
 
 namespace Notes.Api.Controllers
@@ -27,7 +23,6 @@ namespace Notes.Api.Controllers
         [Route("[action]")]
         public async Task<IActionResult> Edit(Note note)
         {
-            //var note = JsonConvert.DeserializeObject<Note>(json.ToString());
             await ApiDbObject.EditNoteAsync(note);
             return Ok(note);
         }

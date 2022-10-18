@@ -4,7 +4,7 @@ namespace Notes.Client.Mvc.Repository
 {
     public interface INoteRepository
     {
-        Task<bool> UpdateRepositoryAsync(string url);
+        Task<bool> UpdateRepositoryAsync();
 
         Task<NoteViewModel> GetNoteByIdAsync(int id);
 

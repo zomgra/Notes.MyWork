@@ -1,9 +1,5 @@
-﻿
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
 using Notes.Client.Mvc.Models;
-using System;
 using System.Net.Http.Headers;
 
 namespace Notes.Client.Mvc.Repository
@@ -12,18 +8,20 @@ namespace Notes.Client.Mvc.Repository
     public class NoteRepository : INoteRepository
     {
         private IEnumerable<NoteViewModel> _notes = new List<NoteViewModel>();
+        private readonly string baseUrl = "https://localhost:8001/api/note/";
 
         public async Task CreateNoteAsync(NoteViewModel viewModel)
         {
             var noteClient = new HttpClient();
-            var url = "https://localhost:8001/api/note/add/";
+            var url = baseUrl + "add/";
             var responce = await noteClient.PostAsJsonAsync(url, viewModel);    
         }
 
         public async Task DeleteAsync(int id)
         {
             var noteClient = new HttpClient();
-            var url = "https://localhost:8001/api/note/delete/" + id;
+            var url = baseUrl + "delete/" + id;
+            
             var responce = await noteClient.DeleteAsync(url);
 
         }
@@ -31,7 +29,7 @@ namespace Notes.Client.Mvc.Repository
         public async Task EditNote(NoteViewModel note)
         {
             var noteClient = new HttpClient();
-            var url = "https://localhost:8001/api/note/edit";
+            var url = baseUrl + "edit";
 
             noteClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -39,44 +37,12 @@ namespace Notes.Client.Mvc.Repository
 
         }
 
-        //    public NoteRepository()
-        //    {
-        //        _notes = new List<NoteViewModel>()
-        //        {
-        //            new NoteViewModel
-        //            {
-        //                Id = 1,
-        //                Title = "Title 1",
-        //                Description = "Description 1"
-        //            },
-        //            new NoteViewModel
-        //            {
-        //                Id = 2,
-        //                Title = "Title 2",
-        //                Description = "Description 2"
-        //            },
-        //            new NoteViewModel
-        //            {
-        //                Id = 3,
-        //                Title = "Title 3",
-        //                Description = "Description 3"
-        //            },
-        //            new NoteViewModel
-        //            {
-        //                Id = 4,
-        //                Title = "Title 4",
-        //                Description = "Description 4"
-        //            }
-
-        //        };
-        //    }
-
         public IEnumerable<NoteViewModel> GetAllNotes() => _notes.ToList();
 
         public async Task<NoteViewModel> GetNoteByIdAsync(int id)
         {
             var noteClient = new HttpClient();
-            var url = "https://localhost:8001/api/note/getid/" + id;
+            var url = baseUrl + "getid/" + id;
 
             var streamResult = await noteClient.GetStringAsync(url);
             var note = JsonConvert.DeserializeObject<NoteViewModel>(streamResult);
@@ -84,9 +50,10 @@ namespace Notes.Client.Mvc.Repository
             return note;
         }
 
-        public async Task<bool> UpdateRepositoryAsync(string url)
+        public async Task<bool> UpdateRepositoryAsync()
         {
             var noteClient = new HttpClient();
+            var url = baseUrl + "all";
             var streamResult = await noteClient.GetStringAsync(url);
             var jsonNotes = JsonConvert.DeserializeObject<List<NoteViewModel>>(streamResult);
             
