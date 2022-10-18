@@ -8,6 +8,11 @@
         margin-top: 30px;
         border: solid 2px gray;
     }
+    .dateinfo{
+        color:gray;
+        font-size:10px;
+        padding-left: 150px;
+    }
     .block{
         margin:15px;
         padding : 30px;
@@ -35,6 +40,7 @@ else
             @*<h2>@note.Id</h2>*@
             <h2>@note.Title</h2>
             <h2>@note.Description</h2>
+            <h3 class="dateinfo">@note.DateTimeModified.ToString("dd-MM-yyyy-m-HH-ss")</h3>
             <a asp-action="Edit" asp-controller="Home" asp-route-id="@note.Id">Edit</a>
         </div>
     }

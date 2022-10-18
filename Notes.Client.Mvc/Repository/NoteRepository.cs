@@ -28,6 +28,7 @@ namespace Notes.Client.Mvc.Repository
 
         public async Task EditNote(NoteViewModel note)
         {
+
             var noteClient = new HttpClient();
             var url = baseUrl + "edit";
 

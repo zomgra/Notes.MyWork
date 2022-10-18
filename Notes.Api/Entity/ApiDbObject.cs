@@ -16,7 +16,7 @@ namespace Notes.Api.Entity
         //Инициализация БД
         private static void InitialDbData()
         {
-            _context.Add(new Note { Id = 1, Title = "Продукты", Description = "Купить 10 яиц" });
+            _context.Add(new Note { Id = 1, Title = "Продукты", Description = "Купить 10 яиц" , DateTimeModified = DateTime.Now});
             _context.SaveChanges();
         }
 
