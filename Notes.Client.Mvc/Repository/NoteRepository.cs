@@ -7,11 +7,12 @@ namespace Notes.Client.Mvc.Repository
 
     public class NoteRepository : INoteRepository
     {
-        private IEnumerable<NoteViewModel> _notes = new List<NoteViewModel>();
+        private IEnumerable<NoteModel> _notes = new List<NoteModel>();
         private readonly string baseUrl = "https://localhost:8001/api/note/";
 
-        public async Task CreateNoteAsync(NoteViewModel viewModel)
+        public async Task CreateNoteAsync(NoteModel viewModel)
         {
+            viewModel.DateTimeModified = DateTime.Now;
             var noteClient = new HttpClient();
             var url = baseUrl + "add/";
             var responce = await noteClient.PostAsJsonAsync(url, viewModel);    
@@ -26,27 +27,25 @@ namespace Notes.Client.Mvc.Repository
 
         }
 
-        public async Task EditNote(NoteViewModel note)
+        public async Task EditNote(NoteModel note)
         {
-
             var noteClient = new HttpClient();
             var url = baseUrl + "edit";
 
             noteClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
             var response = await noteClient.PostAsJsonAsync(url, note);
-
         }
 
-        public IEnumerable<NoteViewModel> GetAllNotes() => _notes.ToList();
+        public IEnumerable<NoteModel> GetAllNotes() => _notes.ToList();
 
-        public async Task<NoteViewModel> GetNoteByIdAsync(int id)
+        public async Task<NoteModel> GetNoteByIdAsync(int id)
         {
             var noteClient = new HttpClient();
             var url = baseUrl + "getid/" + id;
 
             var streamResult = await noteClient.GetStringAsync(url);
-            var note = JsonConvert.DeserializeObject<NoteViewModel>(streamResult);
+            var note = JsonConvert.DeserializeObject<NoteModel>(streamResult);
             if (note == null) return null;
             return note;
         }
@@ -56,7 +55,7 @@ namespace Notes.Client.Mvc.Repository
             var noteClient = new HttpClient();
             var url = baseUrl + "all";
             var streamResult = await noteClient.GetStringAsync(url);
-            var jsonNotes = JsonConvert.DeserializeObject<List<NoteViewModel>>(streamResult);
+            var jsonNotes = JsonConvert.DeserializeObject<List<NoteModel>>(streamResult);
             
             if(jsonNotes == null)
             {

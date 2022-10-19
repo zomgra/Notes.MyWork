@@ -28,12 +28,12 @@ namespace Notes.Client.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new NoteViewModel() { DateTimeModified = DateTime.Now};
+            var model = new NoteModel() { DateTimeModified = DateTime.Now};
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(NoteViewModel viewModel)
+        public async Task<IActionResult> Create(NoteModel viewModel)
         {   
            await noteRepository.CreateNoteAsync(viewModel);
             return RedirectToAction("Index");
@@ -47,9 +47,10 @@ namespace Notes.Client.Mvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(NoteViewModel model)
+        public async Task<IActionResult> Edit(NoteModel model)
         {
             model.DateTimeModified = DateTime.Now;
+            model.IsEdited = true;
 
             await noteRepository.EditNote(model);
             return RedirectToAction("Index");

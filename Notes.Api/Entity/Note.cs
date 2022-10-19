@@ -13,5 +13,7 @@ namespace Notes.Api.Entity
         public string Description { get; set; }
         public DateTime DateTimeModified { get; set; }
 
+        public bool IsEdited { get; set; } = false;
+
     }
 }

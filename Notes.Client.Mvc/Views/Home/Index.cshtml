@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NoteViewModel>
+﻿@model IEnumerable<NoteModel>
 
 <style>
     .create-btn{
@@ -38,7 +38,10 @@ else
     @foreach(var note in Model){
         <div class="block">
             @*<h2>@note.Id</h2>*@
-            <h2>@note.Title</h2>
+            <div style="display:block"><h2 style="float:left">@note.Title</h2>
+                @if(note.IsEdited){<i style="margin-left:10px; float:left">&#128397;</i>}
+            </div>
+            <br><br>
             <h2>@note.Description</h2>
             <h3 class="dateinfo">@note.DateTimeModified.ToString("dd-MM-yyyy-m-HH-ss")</h3>
             <a asp-action="Edit" asp-controller="Home" asp-route-id="@note.Id">Edit</a>

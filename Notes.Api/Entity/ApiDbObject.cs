@@ -35,7 +35,6 @@ namespace Notes.Api.Entity
         //Edit
         public static async Task EditNoteAsync(Note editedNote)
         {
-
            var note = await _context.Notes.FirstOrDefaultAsync(i => i.Id == editedNote.Id);
             if(note != null)
             {
@@ -45,6 +44,7 @@ namespace Notes.Api.Entity
                 await _context.SaveChangesAsync();
             }
         }
+        //Delete
         public static async Task<Note> DeleteNote(int id)
         {
             var note = GetNoteById(id);

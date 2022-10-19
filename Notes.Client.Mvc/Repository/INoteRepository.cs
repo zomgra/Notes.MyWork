@@ -6,12 +6,12 @@ namespace Notes.Client.Mvc.Repository
     {
         Task<bool> UpdateRepositoryAsync();
 
-        Task<NoteViewModel> GetNoteByIdAsync(int id);
+        Task<NoteModel> GetNoteByIdAsync(int id);
 
-        IEnumerable<NoteViewModel> GetAllNotes();
+        IEnumerable<NoteModel> GetAllNotes();
     
-        Task EditNote(NoteViewModel note);
+        Task EditNote(NoteModel note);
         Task DeleteAsync(int id);
-        Task CreateNoteAsync(NoteViewModel viewModel);
+        Task CreateNoteAsync(NoteModel viewModel);
     }
 }

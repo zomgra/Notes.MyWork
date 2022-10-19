@@ -2,7 +2,7 @@
 
 namespace Notes.Client.Mvc.Models
 {
-    public class NoteViewModel
+    public class NoteModel
     {
         public int Id { get; set; }
         [Required]
@@ -11,5 +11,8 @@ namespace Notes.Client.Mvc.Models
         public string Description { get; set; }
 
         public DateTime DateTimeModified { get; set; }
+
+        public bool IsEdited { get; set; } = false;
+
     }
 }
